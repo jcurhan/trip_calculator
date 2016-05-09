@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Trip Calculator</title>
+    <link rel="stylesheet" href="app/css/style.css">
+    <script type="text/javascript" src="lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="app/models/app.js"></script>
+    <script type="text/javascript" src="app/models/car.js"></script>
+    <script type="text/javascript" src="app/models/map.js"></script>
+    <script type="text/javascript" src="app/controllers/carController.js"></script>
+    <script type="text/javascript" src="app/controllers/mapController.js"></script>
+  </head>
+
+  <body>
+    <div class="car-search-form">
+      <h2> Search box </h2>
+        <select name="car-year-field" id="car-year-field"></select>
+        <input type='text' id='car-make-field', placeholder='Honda'>
+        <input type='text' id='car-model-field', placeholder='Civic Si'>
+          <input type='button' id='car-search-submit' value='Find Vehicle'>
+      <div class="car-search-results">
+        <h2></h2>
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="map-search-form">
+      <h2> Search box </h2>
+        <input type='text' id='origin-field', placeholder='Origin'>
+        <input type='text' id='destination-field', placeholder='Destination'>
+          <input type='button' id='map-search-submit' value='Find Route'>
+    </div>
+  </body>
+</html>
