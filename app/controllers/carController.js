@@ -2,6 +2,7 @@ $(function(){
   $('.map-search-form').hide();
   app.car.controller.populateYears();
   $('#car-search-submit').on('click', app.car.controller.search)
+  $('body').on('click', '.selected-car-style', app.car.controller.findMpg)
 })
 
 app.car.controller = {
@@ -10,7 +11,7 @@ app.car.controller = {
     var carYear = $('#car-year-field').val();
     var carMake = $('#car-make-field').val();
     var carModel = $('#car-model-field').val();
-    app.car.adapter.getBy(carYear, carMake, carModel).then(function(carResults){
+    app.car.adapter.carGetBy(carYear, carMake, carModel).then(function(carResults){
       app.car.controller.render(carResults)
     })
   },
@@ -21,13 +22,21 @@ app.car.controller = {
     }
   },
   render: function(carResults){
-    $(".car-search-results h2").empty()
-    $(".car-search-results ul").empty()
-    var stylesNum = carResults.length
+    $(".car-search-results h2").empty();
+    $(".car-search-results ul").empty();
+    var stylesNum = carResults.length;
     $(".car-search-results h2").append("Please select from the following " + stylesNum + " models")
     carResults.forEach(function(car){
-      $(".car-search-results ul").append("<li id="+ car.edmundsId +">" + car.style + " </li>")
-      // once I have carYear, carMake, and Model, append that before edmunds ID
+      $(".car-search-results ul").append("<li><a href='#' class='selected-car-style' id=" + car.styleId + ">" + car.style + "</a></li>")
+      // once I have carYear, carMake, and Model, append that before style ID
+    })
+  },
+  findMpg: function(event) {
+    event.preventDefault()
+    var styleId = $(this).attr('id')
+    var style = $(this).html()
+    app.car.adapter.mpgGetBy(styleId).then(function(mpgResults){
+      debugger;
     })
   }
 }
