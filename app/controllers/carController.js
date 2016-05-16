@@ -8,9 +8,10 @@ $(function(){
 app.car.controller = {
   search: function(event){
     event.preventDefault();
-    var carYear = $('#car-year-field').val();
-    var carMake = $('#car-make-field').val();
-    var carModel = $('#car-model-field').val();
+    $('.ajax-errors ul').empty();
+    carYear = $('#car-year-field').val(); // currently global variables
+    carMake = $('#car-make-field').val();
+    carModel = $('#car-model-field').val();
     app.car.adapter.carGetBy(carYear, carMake, carModel).then(function(carResults){
       app.car.controller.render(carResults)
     })
@@ -27,8 +28,7 @@ app.car.controller = {
     var stylesNum = carResults.length;
     $(".car-search-results h2").append("Please select from the following " + stylesNum + " models")
     carResults.forEach(function(car){
-      $(".car-search-results ul").append("<li><a href='#' class='selected-car-style' id=" + car.styleId + ">" + car.style + "</a></li>")
-      // once I have carYear, carMake, and Model, append that before style ID
+      $(".car-search-results ul").append("<li><a href='#' class='selected-car-style' id=" + car.styleId + ">" + carYear + " " + carMake + " " + carModel + " " + car.style + "</a></li>")
     })
   },
   findMpg: function(event) {

@@ -1,3 +1,17 @@
+// $(function(){
+//   $("#message").ajaxError(function(event, request, settings){
+//         $(this).show();
+//         $(this).append("<li>Error requesting page " + settings.url + "</li>");
+//     });
+// })
+
+$( document ).ajaxError(function() {
+    var carYearError = $('#car-year-field').val();
+    var carMakeError = $('#car-make-field').val();
+    var carModelError = $('#car-model-field').val();
+  $( '.ajax-errors ul' ).append( "<li>We could not locate the " + carYearError + " " + carMakeError + " " + carModelError + " in our system. Please search again!</li>" );
+});
+
 app.car = {
    all : [],
    new: (function() {
@@ -72,12 +86,6 @@ app.car = {
   }
 }
 
-//forEach loop did not have scope for creating objects
- // data.styles.forEach(function(car){
-        //   debugger;
-        //   style = car.name;
-        //   styleId = car.id;
-        // });
 
 // create a success and failure for if they search for a car we dont have or wrong term (
   // Lexus RX-350 and RX 350 works but RX doesnt and Civic SI doesnt)
